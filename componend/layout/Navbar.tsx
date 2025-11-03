@@ -27,8 +27,8 @@ export default function Navbar() {
             sx={{
                 // background: "transparent",
                 background: "white",
-                py: 5,
-                px: { xs: 2, md: 7 },
+                py: { xs: 3, md: 6 },
+                px: { xs: 2, sm: 4, md: 5, lg: 12 },
             }}
         >
             <Box
@@ -42,9 +42,11 @@ export default function Navbar() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    maxWidth: "1400px",
+                    maxWidth: { xs: "100%", xl: "1400px" },
                     mx: "auto",
                     width: "100%",
+                    flexDirection: { xs: "column", md: "row" },
+                    gap: { xs: 2, md: 0 },
                 }}
             >
                 {/* Left: Logo and name */}

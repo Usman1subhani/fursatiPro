@@ -35,17 +35,17 @@ export default function Footer() {
                 mt: 8,
             }}
         >
-            <Container maxWidth="xl">
+            <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 4, md: 6 } }}>
                 <Grid
                     container
-                    // spacing={9}
+                    spacing={{ xs: 4, sm: 6, md: 8 }}
                     justifyContent="space-between"
                     alignItems="flex-start"
                 >
                     {/* Column 1 */}
-                    <Grid item xs={12} sm={6} md={3} {...({} as any)}>
+                    <Grid item xs={12} sm={6} md={3} sx={{ mb: { xs: 4, sm: 0 } }} {...({} as any)}>
                         <Stack spacing={2}>
-                            <Stack direction="row" alignItems="center" spacing={1}> 
+                            <Stack direction="row" alignItems="center" spacing={1}>
                                 <Typography
                                     variant="h6"
                                     sx={{ fontWeight: 700, color: "#ffffff" }}
@@ -86,7 +86,7 @@ export default function Footer() {
 
                     {/* Column 2 */}
                     <Grid item xs={12} sm={6} md={3} {...({} as any)}>
-                        <Stack spacing={1.5}>
+                        <Stack spacing={2} sx={{ mb: { xs: 4, sm: 0 } }} >
                             <Typography
                                 variant="subtitle1"
                                 sx={{ fontWeight: 600, color: "#ffffff" }}

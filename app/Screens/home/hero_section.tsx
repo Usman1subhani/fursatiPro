@@ -12,10 +12,38 @@ import {
     Grid,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import EastIcon from '@mui/icons-material/East';
-import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
+import EastIcon from "@mui/icons-material/East";
+import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 
 export default function HeroSection() {
+    /* ------------------------------------------------------------------ */
+    /* 1. Corner background images + positions                            */
+    /* ------------------------------------------------------------------ */
+    const cornerImages = ["image1.png", "image2.png", "image3.png", "image4.jpg"];
+    const cornerPositions = [
+        { bottom: "60vh", left: "5vw" },
+        { top: "20vh", right: "5vw" },
+        { top: "70vh", left: "9vw" },
+        { bottom: "12vh", right: "5vw" },
+    ];
+
+    /* ------------------------------------------------------------------ */
+    /* 2. Company logos + individual positions (same format as corners)   */
+    /* ------------------------------------------------------------------ */
+    const companyLogos = ["logo1.png", "logo2.png", "logo3.png", "logo3.png"];
+    const companyPositions = [
+        { bottom: "56vh", left: "8vw" },     // logo 1
+        { bottom: "60vh", right: "15vw" },    // logo 2
+        { top: "85vh", left: "20vw" },        // logo 3
+        { bottom: "11vh", right: "15vw" },     // logo 4
+        // Add more if you want
+    ];
+
+    /* ------------------------------------------------------------------ */
+    /* 3. Success avatars – reuse images (testing)                        */
+    /* ------------------------------------------------------------------ */
+    const successImages = ["image1.png", "image2.png", "image3.png", "image4.jpg"];
+
     return (
         <Box
             sx={{
@@ -23,174 +51,155 @@ export default function HeroSection() {
                 minHeight: "100vh",
                 background: "linear-gradient(135deg, #ffffff 0%, #ffffff 100%)",
                 overflow: "hidden",
+                pt: { xs: 10, md: 0 }, // Add padding top for mobile to account for fixed navbar
             }}
         >
-            {/* Background Corner Images */}
-            {/* Background Corner Images (Uniform Containers) */}
-            {["image1.png", "image2.png", "image3.png", "image4.jpg"].map((src, index) => {
-                const positions = [
-                    { top: 100, left: 60 },
-                    { top: 100, right: 60 },
-                    { bottom: 240, left: 75 },
-                    { bottom: 240, right: 60 },
-                ];
-                return (
-                    <Box
-                        key={index}
-                        sx={{
-                            position: "absolute",
-                            width: { xs: 100, md: 180 },
-                            height: { xs: 100, md: 180 },
-                            borderRadius: "20px",
-                            overflow: "hidden",
-                            boxShadow: "0 6px 15px rgba(0,0,0,0.1)",
-                            backgroundColor: "#f5f5f5",
-                            ...positions[index],
-                        }}
-                    >
-                        <Box
-                            component="img"
-                            src={`/hero_section/${src}`}
-                            alt={`Corner ${index + 1}`}
-                            sx={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: "cover", // keeps image proportion inside box
-                            }}
-                        />
-                    </Box>
-                );
-            })}
-
-            {/* Floating Company Logos (White Circular Containers) */}
-            <Grid
-                container
-                spacing={2}
-                sx={{
-                    position: "absolute",
-                    bottom: 100,
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    width: "auto",
-                    display: "flex",
-                    justifyContent: "center",
-                }}
-            >
-                {[
-                    "/dummy-images/google-logo.png",
-                    "/dummy-images/meta-logo.png",
-                    "/dummy-images/amazon-logo.png",
-                    "/dummy-images/microsoft-logo.png",
-                ].map((logo, index) => (
-                    <Grid item key={index} {...({} as any)}>
-                        <Box
-                            sx={{
-                                width: 70,
-                                height: 70,
-                                borderRadius: "50%",
-                                backgroundColor: "white",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                boxShadow: "0 6px 15px rgba(0,0,0,0.1)",
-                                mx: 1,
-                            }}
-                        >
-                            <Box
-                                component="img"
-                                src={logo}
-                                alt={`Company ${index + 1}`}
-                                sx={{
-                                    width: "40px",
-                                    height: "40px",
-                                    objectFit: "contain",
-                                }}
-                            />
-                        </Box>
-                    </Grid>
-                ))}
-            </Grid>
-
-
-            {/* Dotted Arrow (Pointing to search bar) */}
+            {/* Bottom-left decorative frame (behind content) */}
             <Box
                 component="img"
-                src="/dummy-images/dotted-arrow.png" // Replace with your actual image path
-                alt="Arrow"
+                src="/profile/Frame2.png"
+                alt="decorative-frame-2"
                 sx={{
                     position: "absolute",
-                    top: "40%",
-                    right: "25%",
-                    width: "100px",
+                    bottom: { xs: -20, md: -60 },
+                    left: { xs: -20, md: -80 },
+                    width: { xs: 120, md: 320 },
                     height: "auto",
-                    transform: "rotate(-30deg)",
+                    zIndex: 0,
+                    pointerEvents: "none",
+                    display: { xs: "none", sm: "block" },
                 }}
             />
+            {/* ---------- 1. CORNER IMAGES ---------- */}
+            {cornerImages.map((src, i) => (
+                <Box
+                    key={`corner-${i}`}
+                    sx={{
+                        position: "absolute",
+                        width: { xs: 80, sm: 100, md: 140, lg: 180 },
+                        height: { xs: 80, sm: 100, md: 140, lg: 180 },
+                        display: { xs: "none", sm: "block" }, // Hide on very small screens
+                        borderRadius: "20px",
+                        overflow: "hidden",
+                        boxShadow: "0 6px 15px rgba(0,0,0,0.1)",
+                        backgroundColor: "#f5f5f5",
+                        ...cornerPositions[i],
+                    }}
+                >
+                    <Box
+                        component="img"
+                        src={`/hero_section/${src}`}
+                        alt={`Corner ${i + 1}`}
+                        sx={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    />
+                </Box>
+            ))}
 
-            <Container maxWidth="lg">
+            {/* ---------- 2. FLOATING COMPANY LOGOS (WITH POSITIONING) ---------- */}
+            {companyLogos.map((logo, i) => (
+                <Box
+                    key={`logo-${i}`}
+                    sx={{
+                        position: "absolute",
+                        width: 50,
+                        height: 50,
+                        borderRadius: "50%",
+                        backgroundColor: "white",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        boxShadow: "0 6px 15px rgba(0,0,0,0.1)",
+                        zIndex: 2,
+                        ...companyPositions[i], // Apply individual position
+                    }}
+                >
+                    <Box
+                        component="img"
+                        src={`/hero_section/companies-logo/${logo}`}
+                        alt={`Company ${i + 1}`}
+                        sx={{
+                            width: "40px",
+                            height: "40px",
+                            objectFit: "contain",
+                        }}
+                    />
+                </Box>
+            ))}
+
+            {/* ---------- MAIN CONTENT ---------- */}
+            <Container
+                maxWidth="lg"
+                sx={{
+                    px: { xs: 2, sm: 4, md: 6 },
+                    height: "100vh",
+                    display: "flex",
+                    alignItems: "center",
+                }}
+            >
                 <Box
                     sx={{
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
                         justifyContent: "center",
-                        minHeight: "100vh",
+                        width: "100%",
                         textAlign: "center",
                         position: "relative",
                         zIndex: 1,
+                        py: { xs: 4, md: 0 },
                     }}
                 >
                     {/* Star Badge */}
                     <Chip
-                        label="⭐ No.1 tool for smarter job Hunting"
+                        label="🌟 No.1 tool for smarter job Hunting"
                         sx={{
                             backgroundColor: "white",
                             color: "black",
-                            padding: "20px 16px",
+                            py: 2.5,
+                            px: 2,
                             mb: 3,
                             borderRadius: "50px",
                             boxShadow: "0 4px 12px rgba(5, 110, 202, 0.4)",
                         }}
                     />
 
-
-                    {/* Main Heading - 3 rows */}
+                    {/* Heading */}
                     <Typography
                         variant="h2"
                         component="h1"
                         sx={{
                             fontWeight: "bold",
-                            fontSize: { xs: "2.5rem", md: "3.5rem" },
+                            fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem", lg: "3rem" },
                             lineHeight: 1.2,
                             mb: 3,
                             color: "#1a202c",
                         }}
                     >
-                        Find your next <br /> opportunities in {" "}
-                        <Box component="span" className="text-brand">
-                            Saudi Arabia faster, <br />smarter
+                        Find your next <br /> opportunities in{" "}
+                        <Box component="span" sx={{ color: "#056ECA" }}>
+                            Saudi Arabia faster, <br />
+                            smarter
                         </Box>{" "}
-                        and {" "}
-                        <Box component="span" className="text-brand">
-                            fit {" "}
-                        </Box>
+                        and{" "}
+                        <Box component="span" sx={{ color: "#056ECA" }}>
+                            fit
+                        </Box>{" "}
                         for you
                     </Typography>
 
-                    {/* Subheading - 2 rows */}
+                    {/* Sub-heading */}
                     <Typography
                         variant="h6"
                         sx={{
                             color: "#64748b",
-                            fontSize: { xs: "1rem", md: "1.25rem" },
+                            fontSize: { xs: "1rem", md: "0.85rem", lg: "1rem" },
                             lineHeight: 1.6,
                             mb: 5,
                             maxWidth: "600px",
                         }}
                     >
-                        Stop scrolling through endless listings our AI finds, filters and delivers the
-                        {/* <br /> */}
-                        best opportunities for you every day.
+                        Stop scrolling through endless listings – our AI finds, filters and
+                        delivers the best opportunities for you every day.
                     </Typography>
 
                     {/* Search Bar */}
@@ -200,11 +209,11 @@ export default function HeroSection() {
                             flexDirection: { xs: "column", md: "row" },
                             gap: 2,
                             width: "100%",
-                            maxWidth: "900px",
-                            mb: 4,
+                            maxWidth: { xs: "100%", md: "700px", lg: "1000px" },
+                            mb: 3,
                             backgroundColor: "white",
                             borderRadius: "50px",
-                            padding: "8px",
+                            p: "6px",
                             boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
                         }}
                     >
@@ -212,9 +221,7 @@ export default function HeroSection() {
                             placeholder="Job title, Keyword..."
                             fullWidth
                             InputProps={{
-                                startAdornment: (
-                                    <SearchIcon sx={{ color: "#056ECA", mr: 1 }} />
-                                ),
+                                startAdornment: <SearchIcon sx={{ color: "#056ECA", mr: 1 }} />,
                             }}
                             sx={{
                                 "& .MuiOutlinedInput-root": {
@@ -224,7 +231,6 @@ export default function HeroSection() {
                                 },
                             }}
                         />
-
                         <TextField
                             placeholder="City or Region (e.g., Riyadh, Jeddah)"
                             fullWidth
@@ -241,126 +247,111 @@ export default function HeroSection() {
                                 },
                             }}
                         />
-
-                        <Button
-                            className="bg-primary-gradient"
+                        <Button className="bg-primary-gradient text-white rounded-full px-6 py-2 hover:opacity-90 transition"
                             variant="contained"
                             sx={{
                                 borderRadius: "50px",
                                 minWidth: "90px",
                                 color: "white",
                                 fontWeight: "bold",
-                                textTransform: "none", // 👈 prevents uppercase text
-                                "&:hover": { opacity: 0.9 },
                             }}
                         >
                             <SearchIcon />
                         </Button>
                     </Box>
 
-                    {/* Popular Jobs Section */}
+                    {/* Popular Jobs */}
                     <Box sx={{ mb: 6 }}>
                         <Stack
                             direction="row"
                             spacing={0.6}
-                            sx={{
-                                flexWrap: "wrap",
-                                justifyContent: "center",
-                                gap: 1,
-                            }}
+                            sx={{ flexWrap: "wrap", justifyContent: "center", gap: 1 }}
                         >
                             <Typography
                                 variant="h6"
-                                sx={{
-                                    color: "black",
-                                    fontWeight: "500",
-                                    mb: 2,
-                                }}
+                                sx={{ color: "black", fontWeight: 500, mb: 2 }}
                             >
                                 Popular Jobs:
                             </Typography>
-                            {["Designer", "Web Developer", "Ai Engineer", "SQA", "Software Engineer"].map(
-                                (job) => (
-                                    <Chip
-                                        key={job}
-                                        label={job}
-                                        variant="outlined"
-                                        sx={{
-                                            borderColor: "grey",
-                                            color: "black",
-                                            "&:hover": {
-                                                backgroundColor: "var(--brand)",
-                                                color: "white",
-                                            },
-                                        }}
-                                    />
-                                )
-                            )}
+                            {[
+                                "Designer",
+                                "Web Developer",
+                                "Ai Engineer",
+                                "SQA",
+                                "Software Engineer",
+                            ].map((job) => (
+                                <Chip
+                                    key={job}
+                                    label={job}
+                                    variant="outlined"
+                                    sx={{
+                                        borderColor: "grey",
+                                        color: "black",
+                                        "&:hover": {
+                                            backgroundColor: "#056ECA",
+                                            color: "white",
+                                        },
+                                    }}
+                                />
+                            ))}
                         </Stack>
                     </Box>
 
-                    {/* Success Stories Section */}
+                    {/* ---------- 3. SUCCESS STORIES ---------- */}
                     <Box
                         sx={{
                             display: "flex",
                             flexDirection: { xs: "column", md: "row" },
                             alignItems: "center",
-                            gap: 1,
+                            justifyContent: "center",
+                            gap: 1.5,
                             mb: 4,
                         }}
                     >
-                        {/* Success Images */}
-                        <Box
-                            sx={{
-                                display: "flex",
-                                alignItems: "center",
-                            }}
-                        >
-                            {[1, 2, 3, 4].map((item) => (
+                        <Box sx={{ display: "flex", alignItems: "center" }}>
+                            {successImages.map((src, i) => (
                                 <Box
-                                    key={item}
+                                    key={`success-${i}`}
                                     component="img"
-                                    src={`/dummy-images/success-${item}.png`} // Replace with your actual image paths
-                                    alt={`Success ${item}`}
+                                    src={`/hero_section/${src}`}
+                                    alt={`Success ${i + 1}`}
                                     sx={{
                                         width: "40px",
                                         height: "40px",
                                         borderRadius: "50%",
                                         border: "2px solid white",
-                                        marginLeft: item > 1 ? "-8px" : 0,
+                                        marginLeft: i > 0 ? "-8px" : 0,
                                         boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                                        objectFit: "cover",
                                     }}
                                 />
                             ))}
                         </Box>
 
-                        {/* Success Text */}
                         <Typography
                             variant="h6"
-                            sx={{
-                                fontSize: { xs: "0.9rem", md: "0.9rem" },
-                                color: "black",
-                            }}
+                            sx={{ fontSize: { xs: "0.9rem", md: "0.9rem" }, color: "black" }}
                         >
                             Over{" "}
-                            <Box component="span" className="text-brand">
+                            <Box component="span" sx={{ color: "#056ECA" }}>
                                 999+
                             </Box>{" "}
                             Bazenbar are successfully hired
                         </Typography>
                     </Box>
 
-                    {/* Join for Free Button */}
-                    <Button
-                        className="bg-primary-gradient"
+                    {/* Join for Free */}
+                    <Button className="bg-primary-gradient text-white rounded-full px-6 py-2 hover:opacity-90 transition"
                         variant="contained"
                         endIcon={<EastIcon fontSize="large" />}
                         sx={{
                             borderRadius: "50px",
-                            padding: "12px 50px",
+                            px: { xs: 4, md: 6 },
+                            py: { xs: 1.25, md: 1.5 },
                             fontSize: "0.9rem",
+                            // bgcolor: "#056ECA",
                             color: "white",
-                            textTransform: "none", // 👈 added here
+                            textTransform: "none",
                             boxShadow: "0 4px 15px rgba(0,0,0,0.2)",
                             "&:hover": {
                                 transform: "translateY(-2px)",
@@ -371,7 +362,6 @@ export default function HeroSection() {
                     >
                         Join for Free
                     </Button>
-
                 </Box>
             </Container>
         </Box>
