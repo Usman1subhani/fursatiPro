@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/componend/layout/Navbar";
-import Footer from "@/componend/layout/Footer";
+import Navbar from "@/component/layout/Navbar";
+import Footer from "@/component/layout/Footer";
 import HeroSection from "./Screens/home/hero_section";
 import CompaniesSection from "./Screens/home/companies_section";
 import { Box } from "@mui/material";
