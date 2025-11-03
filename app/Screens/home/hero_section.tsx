@@ -31,7 +31,7 @@ export default function HeroSection() {
   /* ------------------------------------------------------------------ */
   /* 2. Company logos + individual positions (same format as corners)   */
   /* ------------------------------------------------------------------ */
-  const companyLogos = ["logo1.png", "logo2.png", "logo3.png", "logo3.png"];
+  const companyLogos = ["logo4.svg", "logo2.png", "logo3.png", "logo1.png"];
 const companyPositions = [
   { top: "25%", left: "7%" },      // Top-left corner of container
   { top: "25%", right: "7%" },     // Top-right
@@ -57,7 +57,7 @@ const companyPositions = [
         minHeight: "100vh",
         background: "linear-gradient(135deg, #ffffff 0%, #ffffff 100%)",
         overflow: "hidden",
-        pt: { xs: 10, md: 0 }, // Add padding top for mobile to account for fixed navbar
+        pt: { xs: 0, md: 2 , lg: 2}, // Add padding top for mobile to account for fixed navbar
       }}
     >
       {/* Bottom-left decorative frame (behind content) */}
@@ -138,12 +138,14 @@ const companyPositions = [
             position: "absolute",
             width: 50,
             height: 50,
+            display: { xs: "none", sm: "flex" , md: "flex", lg: "flex"}, // Hide on very small screens
             borderRadius: "50%",
             backgroundColor: "white",
-            display: "flex",
+           
             alignItems: "center",
             justifyContent: "center",
             boxShadow: "0 6px 15px rgba(0,0,0,0.1)",
+            padding: "4px",
             zIndex: 2,
             ...companyPositions[i], // Apply individual position
           }}
@@ -224,7 +226,7 @@ const companyPositions = [
               mb: 3,
               backgroundColor: "white",
               borderRadius: "50px",
-              p: "6px",
+              p: { xs: "20px", md: "15" , lg: "6px"},
               boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
             }}
           >
@@ -297,11 +299,14 @@ const companyPositions = [
               ].map((job) => (
                 <Chip
                   key={job}
+                  
                   label={job}
                   variant="outlined"
                   sx={{
                     borderColor: "grey",
                     color: "black",
+                    cursor: "pointer",
+
                     "&:hover": {
                       backgroundColor: "#056ECA",
                       color: "white",
