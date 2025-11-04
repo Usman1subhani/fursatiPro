@@ -9,7 +9,7 @@ export default function CompaniesSection() {
         { src: "/companies/microsoft.svg", alt: "Microsoft" },
         { src: "/companies/saudiSaabic.png", alt: "Saudi Saabic" },
         { src: "/companies/elastic-horizontal.png", alt: "Elastic" },
-        { src: "/companies/Saudi-Telecom.png", alt: "Saudi Telecom" }, 
+        { src: "/companies/Saudi-Telecom.png", alt: "Saudi Telecom" },
         { src: "/companies/google.svg", alt: "Google" },
         { src: "/companies/saudiaramco.png", alt: "Saudi Aramco" },
         { src: "/companies/twilio-segment.jpg", alt: "Segment" },
@@ -20,7 +20,7 @@ export default function CompaniesSection() {
         <Box
             component="section"
             sx={{
-                width: "100%",
+                width: "100%", 
                 backgroundColor: "white",
                 // borderTop: "1px solid #e6eef6",
                 py: { xs: 6, sm: 4, md: 5 },
@@ -33,10 +33,10 @@ export default function CompaniesSection() {
                 <Typography
                     variant="body1"
                     align="center"
-                    sx={{ 
-                        color: "#64748b", 
-                        mb: { xs: 4, md: 6 }, 
-                        fontSize: { xs: 14, md: 16 } 
+                    sx={{
+                        color: "#64748b",
+                        mb: { xs: 4, md: 6 },
+                        fontSize: { xs: 14, md: 16 }
                     }}
                 >
                     Trusted by top global and Saudi companies
@@ -72,7 +72,7 @@ export default function CompaniesSection() {
 
                 .slider-track {
                     display: flex;
-                    animation: slide 30s linear infinite;
+                    animation: slide 50s linear infinite;
                     width: max-content;
                 }
 
@@ -89,7 +89,7 @@ export default function CompaniesSection() {
                     align-items: center;
                     justify-content: center;
                     background-color: transparent;
-                    padding: 16px;
+                    padding: 5px;
                 }
 
                 .logo-image {

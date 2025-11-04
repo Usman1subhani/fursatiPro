@@ -3,32 +3,31 @@
 import React, { useState } from "react";
 import { Box, Container, Typography, Grid, Card, CardContent } from "@mui/material";
 import { Search, AutoAwesome, Summarize, Notifications } from "@mui/icons-material";
-
+import ArticleSharpIcon from '@mui/icons-material/ArticleSharp';
+import ElectricBoltSharpIcon from '@mui/icons-material/ElectricBoltSharp';
+import NotificationsNoneSharpIcon from '@mui/icons-material/NotificationsNoneSharp';
 export default function ServicesSection() {
     const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
     const features = [
         {
-            icon: <Search sx={{ fontSize: 32 }} />,
-            title: "Search thousands of jobs",
+            icon: <Search sx={{ fontSize: 32 }} />, 
             description: "From top Saudi and global employers.",
         },
         {
-            icon: <AutoAwesome sx={{ fontSize: 32 }} />,
-            title: "AI suggestions",
+            icon: <ArticleSharpIcon sx={{ fontSize: 32 }} />, 
             description: "AI suggests jobs that truly fit your career goals.",
         },
         {
-            icon: <Summarize sx={{ fontSize: 32 }} />,
-            title: "Skip reading long posts",
+            icon: <ElectricBoltSharpIcon sx={{ fontSize: 32 }} />, 
             description:
-                "Get short AI-generated summaries that highlight only what matters.",
+                "Skip reading long job posts. Get short AI-generated summaries that highlight only what matters.",
         },
         {
-            icon: <Notifications sx={{ fontSize: 32 }} />,
+            icon: <NotificationsNoneSharpIcon sx={{ fontSize: 32 }} />,
             title: "Get new job matches updates",
             description:
-                "Via WhatsApp or Email in Arabic and English.",
+                "Get new job matches updates via WhatsApp or Email in Arabic and English.",
         },
     ];
 
@@ -37,7 +36,7 @@ export default function ServicesSection() {
             component="section"
             sx={{
                 py: { xs: 8, md: 12 },
-                background: "linear-gradient(to bottom, #F9FEFF, #FFFFFF)",
+                background: "linear-gradient(to bottom, #F4FCFDFF, #FFFFFF)",
                 position: "relative",
             }}
         >
@@ -59,8 +58,7 @@ export default function ServicesSection() {
                             borderRadius: "50px",
                             fontSize: "0.875rem",
                             fontWeight: 600,
-                            boxShadow: "0 8px 25px rgba(37, 220, 224, 0.4)",
-                            border: "1px solid #25DCE0",
+                            boxShadow: "0px 18px 55px 0px rgba(30, 220, 224, 0.4)",
                             textAlign: "center",
                         }}
                     >
@@ -82,7 +80,7 @@ export default function ServicesSection() {
                         sx={{
                             fontSize: { xs: "2rem", md: "2.5rem" },
                             fontWeight: 700,
-                            color: "#083A67",
+                            color: "black",
                             mb: 2,
                         }}
                     >
@@ -111,8 +109,8 @@ export default function ServicesSection() {
                     alignItems="stretch"
                     sx={{
                         display: "flex",
-                        flexWrap: "wrap",
-                        justifyContent: "center",
+                        // flexWrap: "wrap",
+                        // justifyContent: "center",
                     }}
                 >
                     {features.map((feature, index) => (
@@ -121,7 +119,7 @@ export default function ServicesSection() {
                             key={index}
                             xs={12}
                             sm={6}
-                            md={3}
+                            md={1}
                             sx={{
                                 display: "flex",
                                 justifyContent: "center",
@@ -132,18 +130,18 @@ export default function ServicesSection() {
                                 onMouseLeave={() => setHoveredCard(null)}
                                 sx={{
                                     width: "100%",
-                                    maxWidth: 260,
+                                    // height: "100%",
+                                    maxHeight: 160,
+                                    maxWidth: 200,
                                     textAlign: "center",
                                     p: 3,
-                                    borderRadius: "24px",
+                                    borderRadius: "16px",
                                     transition: "all 0.3s ease",
-                                    border:
-                                        hoveredCard === index ? "2px solid #25DCE0" : "2px solid transparent",
                                     backgroundColor: "white",
                                     boxShadow:
                                         hoveredCard === index
-                                            ? "0 25px 50px rgba(37, 220, 224, 0.25)"
-                                            : "0 8px 30px rgba(0,0,0,0.08)",
+                                            ? "0 10px 20px rgba(37, 220, 224, 0.25)"
+                                            : "1px 2px 1px rgba(0,0,0,0.08)",
                                     "&:hover": {
                                         transform: "translateY(-10px)",
                                     },
@@ -152,21 +150,18 @@ export default function ServicesSection() {
                                 <CardContent sx={{ p: 0 }}>
                                     <Box
                                         sx={{
-                                            width: 70,
-                                            height: 70,
-                                            borderRadius: "16px",
+                                            width: 60,
+                                            height: 60,
+                                            borderRadius: "10px",
                                             display: "flex",
                                             alignItems: "center",
                                             justifyContent: "center",
-                                            mx: "auto",
+                                            // mx: "auto",
+                                            ml: 0,
                                             mb: 2,
                                             backgroundColor:
                                                 hoveredCard === index ? "#25DCE0" : "#EEFEFE",
                                             color: hoveredCard === index ? "white" : "#25DCE0",
-                                            boxShadow:
-                                                hoveredCard === index
-                                                    ? "0 10px 25px rgba(37, 220, 224, 0.4)"
-                                                    : "0 5px 15px rgba(37, 220, 224, 0.2)",
                                             transition: "all 0.4s ease",
                                         }}
                                     >
@@ -174,22 +169,10 @@ export default function ServicesSection() {
                                     </Box>
 
                                     <Typography
-                                        variant="h6"
-                                        sx={{
-                                            fontSize: "1.05rem",
-                                            fontWeight: 700,
-                                            color: "#083A67",
-                                            mb: 1,
-                                        }}
-                                    >
-                                        {feature.title}
-                                    </Typography>
-
-                                    <Typography
                                         sx={{
                                             color: "#6B7280",
                                             fontSize: "0.9rem",
-                                            lineHeight: 1.6,
+                                            lineHeight: 1.4,
                                         }}
                                     >
                                         {feature.description}
