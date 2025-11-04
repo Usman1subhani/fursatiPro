@@ -9,6 +9,7 @@ import { Box } from "@mui/material";
 import ServicesSection from "./Screens/home/services";
 import GettingStartedSection from "./Screens/home/getingStarted_section";
 import HiredByTopCompanies from "./Screens/home/hiredByTopCompanies";
+import Testimonials from "./Screens/home/testimonials";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -61,6 +62,7 @@ export default function RootLayout({
         <ServicesSection />
         <GettingStartedSection />
         <HiredByTopCompanies />
+        <Testimonials />
         <Footer />
       </body>
     </html>
