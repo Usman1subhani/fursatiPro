@@ -7,6 +7,7 @@ import HeroSection from "./Screens/home/hero_section";
 import CompaniesSection from "./Screens/home/companies_section";
 import { Box } from "@mui/material";
 import ServicesSection from "./Screens/home/services";
+import GettingStartedSection from "./Screens/home/getingStarted_section";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,9 +34,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Box sx={{ position: "relative" }}>
+        {/* <Box sx={{ position: "relative" }}> */}
           <Navbar />
-          {/* Top-right decorative frame (behind navbar) */}
+          {/* Top-right decorative frame (behind navbar)
           <Box
             component="img"
             src="/profile/Frame.png"
@@ -51,12 +52,13 @@ export default function RootLayout({
               display: { xs: "none", sm: "block" },
             }}
           />
-        </Box>
+        </Box> */}
 
         <HeroSection />
         {/* {children} */}
         <CompaniesSection />
         <ServicesSection />
+        <GettingStartedSection />
         <Footer />
       </body>
     </html>
