@@ -48,27 +48,13 @@ export default function GettingStartedSection() {
                 background: "linear-gradient(to bottom, #FFFFFFFF, #FDFDFD)",
             }}
         >
+            <Box sx={{ maxWidth: "1400px", margin: "auto",px:2,display: 'flex',alignItems: 'center',gap:4,justifyContent:'space-between' }}>
             {/* ✅ Image on Right Corner */}
-            <Box
-                component="img"
-                src="/profile/person.png"
-                alt="Smiling person"
-                sx={{
-                    position: "absolute",
-                    right: 0,
-                    bottom: 0,
-                    height: { md: "90%", lg: "100%" },
-                    maxHeight: { md: 580, lg: 550 },
-                    objectFit: "contain",
-                    zIndex: 1,
-                    display: { xs: "none", md: "block" },
-                    pointerEvents: "none",
-                }}
-            />
+           
 
             {/* ✅ Centered Content */}
             <Container
-                maxWidth="lg"
+               
                 sx={{
                     position: "relative",
                     // zIndex: 2,
@@ -98,7 +84,7 @@ export default function GettingStartedSection() {
                 <Box
                     sx={{
                         mb: { xs: 3, md: 5 },
-                        maxWidth: "800px",
+                       
                         mx: "auto",
                     }}
                 >
@@ -135,6 +121,7 @@ export default function GettingStartedSection() {
                     spacing={{ xs: 4, md: 6 }}
                     justifyContent="center"
                     alignItems="stretch"
+                    maxWidth={1200}
                     sx={{ mb: { xs: 3, md: 4 } }}
                 >
                     {features.map((feature, index) => (
@@ -237,6 +224,21 @@ export default function GettingStartedSection() {
                     </Button>
                 </Box>
             </Container>
+             <Box
+                component="img"
+                src="/profile/person.png"
+                alt="Smiling person"
+                sx={{
+                   
+                    height: { md: "90%", lg: "100%" },
+                    maxHeight: { md: 580, lg: 550 },
+                    objectFit: "contain",
+                    zIndex: 1,
+                    display: { xs: "none", md: "block" },
+                    pointerEvents: "none",
+                }}
+            />
+            </Box>
         </Box>
     );
 }

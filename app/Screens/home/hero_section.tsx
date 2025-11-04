@@ -54,7 +54,7 @@ const companyPositions = [
     <Box
       sx={{
         position: "relative",
-        minHeight: "100vh",
+  
         background: "linear-gradient(135deg, #ffffff 0%, #ffffff 100%)",
         overflow: "hidden",
         pt: { xs: 0, md: 2 , lg: 2}, // Add padding top for mobile to account for fixed navbar
@@ -123,7 +123,7 @@ const companyPositions = [
             justifyContent: "center",
             width: "100%",
             maxWidth: "960px", // responsive width instead of fixed width
-            minHeight: { xs: "auto", md: "80vh" }, // allow height to adjust based on content
+            minHeight: { xs: "auto" }, // allow height to adjust based on content
             textAlign: "center",
             position: "relative",
             zIndex: 1,
@@ -182,7 +182,7 @@ const companyPositions = [
             component="h1"
             sx={{
               fontWeight: "bold",
-              fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem", lg: "40px" },
+              fontSize: { xs: "2rem", sm: "2.5rem", md: "40px", lg: "40px" },
               lineHeight: 1.2,
               mb: 3,
               color: "#1a202c",

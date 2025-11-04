@@ -3,12 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/component/layout/Navbar";
 import Footer from "@/component/layout/Footer";
-import HeroSection from "./Screens/home/hero_section";
-import CompaniesSection from "./Screens/home/companies_section";
 import { Box } from "@mui/material";
-import ServicesSection from "./Screens/home/services";
-import GettingStartedSection from "./Screens/home/getingStarted_section";
-
+import Home from "../app/Screens/home/page";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -52,13 +48,11 @@ export default function RootLayout({
               display: { xs: "none", sm: "block" },
             }}
           />
-        </Box> */}
-
-        <HeroSection />
+        </Box>
+       
+       
         {/* {children} */}
-        <CompaniesSection />
-        <ServicesSection />
-        <GettingStartedSection />
+         <Home />
         <Footer />
       </body>
     </html>
