@@ -116,7 +116,7 @@ export default function SignIn() {
               }
             />
             <Link
-              href="#"
+              href="/auth/forgot-password"
               sx={{
                 color: "red",
                 fontSize: "14px",
