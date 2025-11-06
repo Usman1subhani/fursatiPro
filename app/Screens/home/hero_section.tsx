@@ -30,7 +30,7 @@ export default function HeroSection() {
         "@media (max-width:900px)": { top: 20, left: 25 },
         "@media (max-width:600px)": { top: 5, left: 15 },
       },
-      logoPosition: { top: 135, right: 1 }, // 👈 top-left image → logo at top-right
+      logoPosition: { bottom: -20, right: 1 }, // 👈 top-left image → logo at top-right
     },
     {
       cornerImage: "image2.png",
@@ -86,9 +86,8 @@ export default function HeroSection() {
     <Box
       sx={{
         position: "relative",
-        minHeight: "100vh",
         background: `
-          linear-gradient(135deg, #B1F7D6FF 0%, #ffffff 80%) bottom left / 40% 40% no-repeat,
+          linear-gradient(135deg, #EEFDFE  0%, #ffffff 80%) bottom left / 40% 60% no-repeat,
           #ffffff
         `,
         overflow: "hidden",
@@ -177,7 +176,7 @@ export default function HeroSection() {
             justifyContent: "center",
             width: "100%",
             maxWidth: "960px",
-            minHeight: { xs: "auto", md: "80vh" },
+            minHeight: { xs: "auto"},
             textAlign: "center",
             position: "relative",
             zIndex: 1,

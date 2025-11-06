@@ -42,38 +42,22 @@ export default function GettingStartedSection() {
         <Box
             component="section"
             sx={{
-                position: "relative",
                 overflow: "hidden",
                 py: { xs: 8, md: 10 },
                 background: "linear-gradient(to bottom, #FFFFFFFF, #FDFDFD)",
             }}
         >
-            {/* ✅ Image on Right Corner */}
-            <Box
-                component="img"
-                src="/profile/person.png"
-                alt="Smiling person"
-                sx={{
-                    position: "absolute",
-                    right: 0,
-                    bottom: 0,
-                    height: { md: "90%", lg: "100%" },
-                    maxHeight: { md: 580, lg: 550 },
-                    objectFit: "contain",
-                    zIndex: 1,
-                    display: { xs: "none", md: "block" },
-                    pointerEvents: "none",
-                }}
-            />
+            <Box sx={{display:'flex', justifyContent:'space-between', alignItems:'center', maxWidth:'1200px', mx:'auto', px:2}}>
+             
 
             {/* ✅ Centered Content */}
-            <Container
-                maxWidth="lg"
+            <Box
+                
                 sx={{
                     position: "relative",
                     // zIndex: 2,
                     textAlign: "center",
-                    pr: { md: "25%", lg: "20%", xl: "15%", xxl: "10%" }, // ✅ adds padding-right to keep cards away from the image
+                    
                 }}
             >
                 {/* Badge */}
@@ -236,7 +220,24 @@ export default function GettingStartedSection() {
                         Join for Free
                     </Button>
                 </Box>
-            </Container>
+            </Box>
+               <Box
+                    sx={{
+                       
+                        height: { md: "728px", lg: "728px" },
+                    maxHeight: { md: 580, lg: 550 },
+                    objectFit: "contain",
+                    right: 0,
+                    width:"486px",
+                    zIndex: 1,
+                    display: { xs: "none", md: "block" },
+                    pointerEvents: "none",
+                }}
+            >
+                <img src="/profile/person.png" alt="Smiling person" />
+
+            </Box>
+            </Box>
         </Box>
     );
 }
