@@ -230,7 +230,7 @@ export default function SignIn() {
             sx={{ color: "text.secondary" }}
           >
             Don’t have an account?{" "}
-            <Link href="#" sx={{ fontWeight: 600 }}>
+            <Link href="/auth/sign-up" sx={{ fontWeight: 600 }}>
               Sign up
             </Link>
           </Typography>

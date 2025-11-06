@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import logo from "@/public/profile/logo.jpg";
+import { navigate } from "next/dist/client/components/segment-cache-impl/navigation";
 
 export default function Navbar() {
   const [activeLink, setActiveLink] = React.useState("/");
@@ -146,39 +147,45 @@ export default function Navbar() {
               <MenuItem value="AR">🇸🇦 AR</MenuItem>
             </Select>
 
-            <Button
-              variant="outlined"
-              sx={{
-                borderRadius: "50px",
-                textTransform: "none",
-                borderColor: "var(--brand)",
-                color: "var(--brand)",
-                px: 4,
-                // py: 0.5,
-                "&:hover": {
-                  borderColor: "#083A67",
-                  backgroundColor: "rgba(5,110,202,0.05)",
-                },
-              }}
-            >
-              Log In
-            </Button>
+            <Link href="/auth/sign-in" style={{ textDecoration: "none" }}>
+              <Button
+                variant="outlined"
+                sx={{
+                  borderRadius: "50px",
+                  textTransform: "none",
+                  borderColor: "var(--brand)",
+                  color: "var(--brand)",
+                  px: 4,
+                  // py: 0.5,
+                  "&:hover": {
+                    borderColor: "#083A67",
+                    backgroundColor: "rgba(5,110,202,0.05)",
+                  },
+                }}
+                onClick={() => setMobileOpen(false)}
+              >
+                Log In
+              </Button>
+            </Link>
 
-            <Button
-              variant="contained"
-              sx={{
-                borderRadius: "50px",
-                textTransform: "none",
-                background: "linear-gradient(90deg, #056ECA 0%, #083A67 100%)",
-                px: 4,
-                // py: 0.6,
-                "&:hover": {
-                  background: "linear-gradient(90deg, #045db0 0%, #062f53 100%)",
-                },
-              }}
-            >
-              Sign Up
-            </Button>
+            <Link href="/auth/sign-up" style={{ textDecoration: "none" }}>
+              <Button
+                variant="contained"
+                sx={{
+                  borderRadius: "50px",
+                  textTransform: "none",
+                  background: "linear-gradient(90deg, #056ECA 0%, #083A67 100%)",
+                  px: 4,
+                  // py: 0.6,
+                  "&:hover": {
+                    background: "linear-gradient(90deg, #045db0 0%, #062f53 100%)",
+                  },
+                }}
+                onClick={() => setMobileOpen(false)}
+              >
+                Sign Up
+              </Button>
+            </Link>
           </Stack>
         </Box>
       </AppBar>
