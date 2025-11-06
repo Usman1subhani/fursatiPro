@@ -6,6 +6,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { Drawer, IconButton } from "@mui/material";
 
+
 import {
   AppBar,
   Box,
@@ -20,7 +21,6 @@ import {
 import Image from "next/image";
 import logo from "@/public/profile/logo.jpg";
 import { navigate } from "next/dist/client/components/segment-cache-impl/navigation";
-
 export default function Navbar() {
   const [activeLink, setActiveLink] = React.useState("/");
   const [language, setLanguage] = React.useState("EN");
@@ -167,18 +167,19 @@ export default function Navbar() {
                 Log In
               </Button>
             </Link>
-
             <Link href="/auth/sign-up" style={{ textDecoration: "none" }}>
               <Button
                 variant="contained"
                 sx={{
                   borderRadius: "50px",
                   textTransform: "none",
-                  background: "linear-gradient(90deg, #056ECA 0%, #083A67 100%)",
+                  background:
+                    "linear-gradient(90deg, #056ECA 0%, #083A67 100%)",
                   px: 4,
                   // py: 0.6,
                   "&:hover": {
-                    background: "linear-gradient(90deg, #045db0 0%, #062f53 100%)",
+                    background:
+                      "linear-gradient(90deg, #045db0 0%, #062f53 100%)",
                   },
                 }}
                 onClick={() => setMobileOpen(false)}
