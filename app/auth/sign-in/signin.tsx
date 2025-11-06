@@ -129,28 +129,30 @@ export default function SignIn() {
           </Box>
 
           {/* Signin Button */}
-          <Button
-            variant="contained"
-            fullWidth
-            sx={{
-              borderRadius: "50px",
-              py: 1.5,
-              mb: 1.5,
-              fontSize: "0.9rem",
-              color: "white",
-              textTransform: "none",
-              background:
-                "linear-gradient(90deg, #0A4D91 0%, #2F80ED 100%)",
-              boxShadow: "0 4px 15px rgba(0,0,0,0.2)",
-              "&:hover": {
-                transform: "translateY(-2px)",
-                boxShadow: "0 6px 20px rgba(0,0,0,0.25)",
-              },
-              transition: "all 0.3s ease",
-            }}
-          >
-            Sign in
-          </Button>
+          <Link href="/" style={{ textDecoration: "none" }}>
+            <Button
+              variant="contained"
+              fullWidth
+              sx={{
+                borderRadius: "50px",
+                py: 1.5,
+                mb: 1.5,
+                fontSize: "0.9rem",
+                color: "white",
+                textTransform: "none",
+                background:
+                  "linear-gradient(90deg, #0A4D91 0%, #2F80ED 100%)",
+                boxShadow: "0 4px 15px rgba(0,0,0,0.2)",
+                "&:hover": {
+                  transform: "translateY(-2px)",
+                  boxShadow: "0 6px 20px rgba(0,0,0,0.25)",
+                },
+                transition: "all 0.3s ease",
+              }}
+            > 
+              Sign in
+            </Button>
+          </Link>
 
           {/* Divider */}
           <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
