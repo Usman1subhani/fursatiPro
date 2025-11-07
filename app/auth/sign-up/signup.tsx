@@ -15,6 +15,7 @@ import {
     StepLabel,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useRouter } from "next/navigation";
 
 export default function SignUp() {
     const [showPassword, setShowPassword] = useState(false);
@@ -23,7 +24,7 @@ export default function SignUp() {
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleClickShowConfirmPassword = () =>
         setShowConfirmPassword((show) => !show);
-
+    const Router = useRouter();
     const steps = ["Account Setup", "Smart CV Upload", "Complete Profile"];
 
     return (
@@ -190,6 +191,7 @@ export default function SignUp() {
 
                     {/* SignUp Button */}
                     <Button
+                        onClick={() => Router.push("/auth/otp")}
                         variant="contained"
                         fullWidth
                         sx={{

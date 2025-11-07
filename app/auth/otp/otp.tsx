@@ -8,8 +8,10 @@ import {
     Link,
     TextField,
 } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 export default function VerifyAccount() {
+    const router = useRouter();
     return (
         <Box
             sx={{
@@ -99,6 +101,7 @@ export default function VerifyAccount() {
 
                     {/* Verify Button */}
                     <Button
+                        onClick={() => router.push("/auth/personalized-job-profile")}
                         fullWidth
                         variant="contained"
                         sx={{
