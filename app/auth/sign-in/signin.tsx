@@ -23,8 +23,6 @@ export default function SignIn() {
     <Box
       sx={{
         display: "flex",
-        height: "100vh",
-        width: "100vw",
       }}
     >
       {/* LEFT SIDE — Form Section (60%) */}
@@ -244,7 +242,6 @@ export default function SignIn() {
         sx={{
           width: "40%",
           display: { xs: "none", md: "block" },
-          height: "100%",
           background: "white",
           overflow: "hidden",
         }}

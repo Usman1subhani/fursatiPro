@@ -10,6 +10,7 @@ export default function LayoutClient({ children }: { children: React.ReactNode }
 
     return (
         <>
+          
             {!isAuthRoute && <Navbar />}
             <main>{children}</main>
             {!isAuthRoute && <Footer />}

@@ -1,4 +1,3 @@
- 
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -11,11 +10,9 @@ import { Box } from "@mui/material";
 import ServicesSection from "./Screens/home/services";
 import GettingStartedSection from "./Screens/home/getingStarted_section";
 import HiredByTopCompanies from "./Screens/home/hiredByTopCompanies";
-import Testimonials from "./Screens/home/testimonials"; 
+import Testimonials from "./Screens/home/testimonials";
 import FindJobsCardSection from "./Screens/home/findJobCard";
 import PerfectJobForYou from "./Screens/home/perfectJobForYou";
-
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -31,15 +28,19 @@ export const metadata: Metadata = {
   description: "Developed by Usman Subhani",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-          <LayoutClient>{children}</LayoutClient>
+        <LayoutClient>{children}</LayoutClient>
         {/* <Box sx={{ position: "relative" }}> */}
-        <Navbar />
+        {/* <Navbar /> */}
         {/* Top-right decorative frame (behind navbar)
           <Box
             component="img"
@@ -58,16 +59,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         </Box> */}
 
-        <HeroSection />
+        {/* <HeroSection /> */}
         {/* {children} */}
-        <CompaniesSection />
-        <ServicesSection />
-        <GettingStartedSection />
-        <HiredByTopCompanies />
-        <PerfectJobForYou />
-        <Testimonials />
-        <FindJobsCardSection />
-        <Footer />
+        {/* <CompaniesSection /> */}
+        {/* <ServicesSection /> */}
+        {/* <GettingStartedSection /> */}
+        {/* <HiredByTopCompanies /> */}
+        {/* <PerfectJobForYou /> */}
+        {/* <Testimonials /> */}
+        {/* <FindJobsCardSection /> */}
+        {/* <Footer /> */}
       </body>
     </html>
   );
