@@ -17,10 +17,10 @@ export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up("md")); // ≥900px
-  const isLg = useMediaQuery(theme.breakpoints.up("lg")); // ≥1200px
 
-  // visible count based on breakpoints
-  const visibleCount = isLg ? 3 : isMd ? 2 : 1;
+// ✅ Max two cards always on desktop
+const visibleCount = isMd ? 2 : 1;
+
 
   const testimonials = [
     {

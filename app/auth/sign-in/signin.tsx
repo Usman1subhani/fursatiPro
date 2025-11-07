@@ -35,7 +35,7 @@ export default function SignIn() {
           justifyContent: "center",
           alignItems: "center",
           px: { xs: 4, sm: 8, md: 12 },
-          py: { xs: 6, md: 0 },
+          py: { xs: 6, md: 2 },
         }}
       >
         <Box sx={{ width: "100%", maxWidth: 400 }}>
@@ -165,17 +165,16 @@ export default function SignIn() {
           </Box>
 
           {/* Social Buttons */}
-          <Box sx={{ display: "flex", justifyContent: "center", mb: 1.2 }}>
-            <Box display="flex" justifyContent="center" alignItems="center" gap={3}>
               <Button
                 variant="outlined"
                 sx={{
-                  width: 80,
+                  width: "100%",
+
                   height: 45,
                   borderRadius: "8px",
                   border: "1px solid #A0A0A0FF",
-                  p: 0,
-                }}
+                  marginBottom: "5px",
+                                 }}
               >
                 <img
                   src="/companies/google-G.svg"
@@ -184,45 +183,6 @@ export default function SignIn() {
                   height={24}
                 />
               </Button>
-
-              <Button
-                variant="outlined"
-                sx={{
-                  width: 80,
-                  height: 45,
-                  borderRadius: "8px",
-                  border: "1px solid #A0A0A0FF",
-                  p: 0,
-                }}
-              >
-                <img
-                  src="/companies/microsoft-logo.svg"
-                  alt="Microsoft"
-                  width={24}
-                  height={24}
-                />
-              </Button>
-
-              <Button
-                variant="outlined"
-                sx={{
-                  width: 80,
-                  height: 45,
-                  borderRadius: "8px",
-                  border: "1px solid #A0A0A0FF",
-                  p: 0,
-                }}
-              >
-                <img
-                  src="/companies/apple.svg"
-                  alt="Apple"
-                  width={24}
-                  height={24}
-                />
-              </Button>
-            </Box>
-          </Box>
-
           {/* Signup Link */}
           <Typography
             variant="body2"

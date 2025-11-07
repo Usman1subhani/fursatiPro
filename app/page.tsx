@@ -6,7 +6,7 @@ import GettingStartedSection from "./Screens/home/getingStarted_section";
 import HiredByTopCompanies from "./Screens/home/hiredByTopCompanies";
 import Testimonials from "./Screens/home/testimonials";
 import FindJobsCardSection from "./Screens/home/findJobCard";
-
+import PerfectJobForYou from "./Screens/home/perfectJobForYou";
 export default function HomePage() {
   return (
     <>
@@ -15,6 +15,7 @@ export default function HomePage() {
       <ServicesSection />
       <GettingStartedSection />
       <HiredByTopCompanies />
+      <PerfectJobForYou />
       <Testimonials />
       <FindJobsCardSection />
     </>
