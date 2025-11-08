@@ -48,6 +48,7 @@ export default function PersonalizedJobProfile() {
               Help us understand your preferences to deliver tailored job recommendations that match your career goals.
             </Typography>
             <Button onClick={() => router.push("/auth/create-account-instantly")} sx={{backgroundImage:'linear-gradient(to right, rgba(5, 110, 202, 1), rgba(8, 58, 103, 1))',color:'white',padding:'8px 16px 8px 16px',borderRadius:'70px',fontSize:{xs:'10px',sm:'12px',md:'14px',width:'100%'}}}>Continue</Button>
+            <Button  sx={{color:'black',padding:'8px 16px 8px 16px',borderRadius:'70px',fontSize:{xs:'10px',sm:'12px',md:'14px',width:'100%'}}}>Skip</Button>
             </Box>
           </Box>
         </Box>

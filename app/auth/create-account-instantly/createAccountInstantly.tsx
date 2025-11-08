@@ -23,6 +23,10 @@ export default function CreateAccountInstantly() {
   const [progress, setProgress] = useState<number>(0);
   const [error, setError] = useState<string>("");
   const [file, setFile] = useState<File | null>(null);
+  const errorRef = useRef(false);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+
   const allowedTypes = [
     "application/pdf",
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
@@ -30,12 +34,18 @@ export default function CreateAccountInstantly() {
     "application/rtf",
     "text/plain",
   ];
+  React.useEffect(() => {
+    errorRef.current = Boolean(error);
+  }, [error]);
+
   const reset = () => {
+    setIsUploading(false);
     setFile(null);
     setProgress(0);
     setError("");
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -44,27 +54,33 @@ export default function CreateAccountInstantly() {
     if (!allowedTypes.includes(file.type)) {
       setError("❗ Invalid file type. Only PDF, DOCX, DOC, RTF, TXT allowed.");
       setFile(null);
+      setIsUploading(false);
       return;
     }
 
     if (file.size > 10 * 1024 * 1024) {
       setError("❗ File is too large. Max size 10MB.");
       setFile(null);
+      setIsUploading(false);
       return;
     }
 
     setError("");
+    setIsUploading(true);
     setFile(file);
     setProgress(0);
     // ---- Simulated Upload Progress ----
     const interval = setInterval(() => {
       setProgress((prev) => {
-        if (error) {
+        // ✅ Stop exactly where progress currently is when error occurs
+        if (errorRef.current) {
           clearInterval(interval);
+          setIsUploading(false);
           return prev;
         }
         if (prev >= 100) {
           clearInterval(interval);
+          setIsUploading(false);
           return 100;
         }
         return prev + 10;
@@ -73,6 +89,49 @@ export default function CreateAccountInstantly() {
   };
   const triggerError = () => {
     setError("Upload failed! Please try again.");
+  };
+  const handleTryAgain = () => {
+    reset();
+    setTimeout(() => {
+      if (fileInputRef.current) {
+        fileInputRef.current.click(); // Re-open file picker properly
+      }
+    }, 50); // 50ms delay ensures the element is ready
+  };
+  // Save & Continue click
+  const handleSaveContinue = () => {
+    if (!file) {
+      setError("Please upload a file first.");
+      return;
+    }
+    if (error) {
+      setError("Please resolve the existing error before continuing.");
+      return;
+    }
+    if (isUploading) {
+      setError("File is still uploading, please wait...");
+      return;
+    }
+
+    // Upload complete, show dialog
+    setOpenDialog(true);
+
+    // Simulate delay before navigating
+    // Simulate reading duration (e.g., 3 seconds)
+    setTimeout(() => {
+      setOpenDialog(false);
+      if (file) {
+        sessionStorage.setItem(
+          "uploadedfile",
+          JSON.stringify({
+            name: file.name,
+            size: file.size,
+            type: file.type,
+          })
+        );
+      }
+      Router.push("/auth/resume-profile"); // Redirect after reading is complete
+    }, 3000);
   };
   return (
     <Box
@@ -222,6 +281,18 @@ export default function CreateAccountInstantly() {
               >
                 Accepted formats: PDF, DOCX, DOC, RTF, TXT — Max size: 10 MB
               </Typography>
+              {error && (
+                <Typography
+                  sx={{
+                    fontWeight: 400,
+                    color: "red",
+                    fontSize: "12px",
+                    mt: 1,
+                  }}
+                >
+                  {error}
+                </Typography>
+              )}
 
               {/* Hidden Input */}
               <input
@@ -283,9 +354,7 @@ export default function CreateAccountInstantly() {
                   </Typography>
                   <CloseIcon
                     onClick={() => {
-                      setFile(null);
-                      setProgress(0);
-                      if (fileInputRef.current) fileInputRef.current.value = "";
+                      reset();
                     }}
                     sx={{
                       cursor: "pointer",
@@ -334,46 +403,144 @@ export default function CreateAccountInstantly() {
                   </span>
                 </Box>
                 {error && (
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      borderColor: "red",
-                      width: "100%",
-                      maxWidth: 300,
-                      marginLeft: "auto",
-                      marginRight: "auto",
-                      mt: 2,
-                      color: "red",
-                      padding: "8px 16px 8px 16px",
-                      borderRadius: "48px",
-                      fontSize: {
-                        xs: "10px",
-                        sm: "12px",
-                        md: "14px",
+                  <>
+                    <Typography
+                      sx={{
+                        fontWeight: 400,
+                        color: "red",
+                        fontSize: "12px",
+                        mt: 1,
+                      }}
+                    >
+                      {error}
+                    </Typography>
+                    <Button
+                      variant="outlined"
+                      onClick={handleTryAgain}
+                      sx={{
+                        borderColor: "red",
                         width: "100%",
-                      },
-                    }}
-                  >
-                    Try Again
-                  </Button>
+                        maxWidth: 300,
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        mt: 2,
+                        color: "red",
+                        padding: "8px 16px 8px 16px",
+                        borderRadius: "48px",
+                        fontSize: {
+                          xs: "10px",
+                          sm: "12px",
+                          md: "14px",
+                          width: "100%",
+                        },
+                      }}
+                    >
+                      Try Again
+                    </Button>
+                  </>
                 )}
               </Box>
             </Box>
           )}
           <Box sx={{ textAlign: "center" }}>
             <Button
+              disabled={isUploading} // ✅ Disable logic
+              onClick={handleSaveContinue}
               sx={{
                 backgroundImage:
                   "linear-gradient(to right, rgba(5, 110, 202, 1), rgba(8, 58, 103, 1))",
                 color: "white",
+                "&.Mui-disabled": {
+                  backgroundImage:
+                    "linear-gradient(to right, rgba(5, 110, 202, 1), rgba(8, 58, 103, 1))", // keep same bg
+                  color: "white", // keep text color
+                  opacity: 0.7, // optional: slightly faded
+                },
                 padding: "8px 16px 8px 16px",
+
                 borderRadius: "70px",
                 fontSize: { xs: "10px", sm: "12px", md: "14px", width: "100%" },
               }}
             >
               {" "}
-              Save & Continue
+              {isUploading ? "Uploading..." : "Save & Continue"}
             </Button>
+            {/* LOADING DIALOG */}
+            {openDialog && (
+              <Box
+                sx={{
+                  position: "fixed",
+                  top: 0,
+                  left: 0,
+                  width: "100vw",
+                  height: "100vh",
+                  bgcolor: "rgba(0,0,0,0.4)",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  zIndex: 2000,
+                }}
+              >
+                <Box
+                  sx={{
+                    background: "white",
+                    p: 4,
+                    borderRadius: "12px",
+                    width: "90%",
+                    maxWidth: 400,
+                    textAlign: "center",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: "18px",
+                      fontWeight: 600,
+                      color: "#056eca",
+                      mb: 1,
+                    }}
+                  >
+                    Reading Your Resume…
+                  </Typography>
+
+                  <Typography sx={{ fontSize: "13px", color: "#666", mb: 3 }}>
+                    We’re reading your CV to fill your profile automatically.
+                    Please wait a moment while we extract your details.
+                  </Typography>
+
+                  {/* Dotted Loader */}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      gap: 1,
+                    }}
+                  >
+                    <img
+                      src="/authPhotos/Spin@1x-1.0s-111px-111px.svg"
+                      alt="Loading..."
+                    />
+                  </Box>
+                </Box>
+
+                <style jsx global>{`
+                  @keyframes pulse {
+                    0% {
+                      transform: scale(1);
+                      opacity: 0.4;
+                    }
+                    50% {
+                      transform: scale(1.4);
+                      opacity: 1;
+                    }
+                    100% {
+                      transform: scale(1);
+                      opacity: 0.4;
+                    }
+                  }
+                `}</style>
+              </Box>
+            )}
+
             <Button onClick={triggerError}>Simulate Upload Error</Button>
             {!file && (
               <>
@@ -463,7 +630,6 @@ export default function CreateAccountInstantly() {
           />
         </Box>
       ) : (
-        // ✅ File uploaded & no error → Show success image
         <Box
           sx={{
             width: "40%",

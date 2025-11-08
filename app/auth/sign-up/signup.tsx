@@ -227,30 +227,26 @@ export default function SignUp() {
                     </Box>
 
                     {/* Social Buttons */}
-                    <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
-                        <Box display="flex" justifyContent="center" alignItems="center" gap={3}>
-                            {["google-G.svg", "microsoft-logo.svg", "apple.svg"].map((icon) => (
-                                <Button
-                                    key={icon}
-                                    variant="outlined"
-                                    sx={{
-                                        width: 80,
-                                        height: 45,
-                                        borderRadius: "8px",
-                                        border: "1px solid #A0A0A0FF",
-                                        p: 0,
-                                    }}
-                                >
-                                    <img
-                                        src={`/companies/${icon}`}
-                                        alt={icon}
-                                        width={24}
-                                        height={24}
-                                    />
-                                </Button>
-                            ))}
-                        </Box>
-                    </Box>
+                   
+                             <Button
+                                            variant="outlined"
+                                            sx={{
+                                              width: "100%",
+                            
+                                              height: 45,
+                                              borderRadius: "8px",
+                                              border: "1px solid #A0A0A0FF",
+                                              marginBottom: "5px",
+                                                             }}
+                                          >
+                                            <img
+                                              src="/companies/google-G.svg"
+                                              alt="Google"
+                                              width={24}
+                                              height={24}
+                                            />
+                                          </Button>
+                       
 
                     {/* Login Link */}
                     <Typography
