@@ -1,5 +1,13 @@
 "use client";
-import { Box, Typography, Button, LinearProgress } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Button,
+  LinearProgress,
+  TextField,
+  TextareaAutosize,
+  Chip,
+} from "@mui/material";
 import { useRouter } from "next/navigation";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -7,6 +15,81 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import { Divider } from "@mui/material";
 import React, { useRef, useState, useEffect } from "react";
+const sections = [
+  {
+    title: "Personal Information",
+    icon: "/authPhotos/resumeProfile/user-tag.svg",
+    content: (
+      <Box sx={{ display: "flex", flexDirection: "row", gap: 1 }}>
+         <img src="/authPhotos/resumeProfile/profileimg.svg" alt="Profile Image" />
+         <Box sx={{display: "flex", flexDirection: "column",mt:1 ,px:1}}>
+             <Typography fontSize={16} color="rgba(33, 33, 33, 1)" >Upload Photo </Typography>
+             <Typography fontSize={12} color="rgba(92, 92, 92, 1)" >Minimum size 100 x 100 px</Typography>
+             <Button  sx={{mt:1,backgroundColor:"rgba(249, 249, 249, 1)",borderRadius:"4px",padding:'8px 16px 8px 16px',gap:"4px"}}>
+                <img src="/authPhotos/resumeProfile/CloudArrowUp.svg" alt="CloudArrowUp" />
+                 <Typography sx={{fontSize:12}}color="rgba(33, 33, 33, 1)" >Browse</Typography>
+
+             </Button>
+         </Box>
+      </Box>
+    ),
+  },
+  {
+    title: "Professional Summary",
+    icon: "/authPhotos/resumeProfile/user-alt.svg",
+    content: (
+      <Box sx={{ p: 1, bgcolor: "#f5f5f5", borderRadius: "8px" }}>
+        <Typography fontSize={12}>
+          Write a short summary about your professional background.
+        </Typography>
+        <TextareaAutosize
+          minRows={4}
+          placeholder="Your summary..."
+          style={{ width: "100%", marginTop: 5, padding: 8 }}
+        />
+      </Box>
+    ),
+  },
+  {
+    title: "Job Preferences",
+    icon: "/authPhotos/resumeProfile/briefcase-plus.svg",
+    content: (
+      <Box
+        sx={{ display: "flex", flexDirection: "row", gap: 1, flexWrap: "wrap" }}
+      >
+        <Button variant="outlined">Full-time</Button>
+        <Button variant="outlined">Part-time</Button>
+        <Button variant="outlined">Remote</Button>
+      </Box>
+    ),
+  },
+  {
+    title: "Professional Skills",
+    icon: "/authPhotos/resumeProfile/medal-star.svg",
+    content: (
+      <Box
+        sx={{ display: "flex", flexDirection: "row", gap: 1, flexWrap: "wrap" }}
+      >
+        <Chip label="JavaScript" color="primary" />
+        <Chip label="React" color="primary" />
+        <Chip label="Node.js" color="primary" />
+      </Box>
+    ),
+  },
+  {
+    title: "Education",
+    icon: "/authPhotos/resumeProfile/graduation-cap.svg",
+    content: (
+      <Box sx={{ border: "1px solid #e0e0e0", borderRadius: 2, p: 1 }}>
+        <Typography fontWeight={500}>Bachelor of Science</Typography>
+        <Typography fontSize={12} color="gray">
+          University Name, 2019 - 2023
+        </Typography>
+      </Box>
+    ),
+  },
+];
+
 export default function ResumeProfile() {
   const steps = ["Account Setup", "Smart CV Upload", "Complete Profile"];
   const percentage = 80;
@@ -19,6 +102,15 @@ export default function ResumeProfile() {
   const [isUploading, setIsUploading] = useState(false);
   const [progress, setProgress] = useState<number>(0);
   const errorRef = useRef(false);
+  const [expandedSections, setExpandedSections] = useState<boolean[]>(
+    Array(9).fill(false) // 9 sections
+  );
+  const toggleSection = (index: number) => {
+    setExpandedSections((prev) =>
+      prev.map((val, i) => (i === index ? !val : val))
+    );
+  };
+
   const allowedTypes = [
     "application/pdf",
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
@@ -220,371 +312,63 @@ export default function ResumeProfile() {
                 px: { xs: 1, md: 2 },
               }}
             >
-              <Box
-                sx={{
-                  cursor: "pointer",
-                  display: "flex",
-                  flexDirection: "column",
-                  padding: "20px",
-                  border: "1px solid rgba(237, 237, 237, 1)",
-                  bgcolor: "rgba(255, 255, 255, 1)",
-                  borderRadius: "10px",
-                  justifyContent: "space-between",
-                  mb: 2,
-                }}
-              >
+              {sections.map((section, index) => (
                 <Box
+                  key={index}
+                  onClick={() => toggleSection(index)}
                   sx={{
+                    cursor: "pointer",
                     display: "flex",
-                    flexDirection: "row",
+                    flexDirection: "column",
+                    padding: "20px",
+                    border: "1px solid rgba(237, 237, 237, 1)",
+                    bgcolor: "rgba(255, 255, 255, 1)",
+                    borderRadius: "10px",
                     justifyContent: "space-between",
+                    mb: 2,
                   }}
                 >
-                  <Box sx={{ display: "flex", flexDirection: "row", gap: 1 }}>
-                    <img
-                      src="/authPhotos/resumeProfile/user-tag.svg"
-                      alt="user-tag"
-                    />
-                    <Typography
-                      variant="body1"
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Box sx={{ display: "flex", flexDirection: "row", gap: 1 }}>
+                      <img src={section.icon} alt={section.title} />
+                      <Typography
+                        variant="body1"
+                        sx={{
+                          fontSize: "12px",
+                          color: "rgba(0, 0, 0, 1)",
+                          fontWeight: "700",
+                        }}
+                      >
+                        {section.title}
+                      </Typography>
+                    </Box>
+                    <Box
                       sx={{
-                        fontSize: "12px",
-                        color: "rgba(0, 0, 0, 1)",
-                        fontWeight: "700",
+                        transform: expandedSections[index]
+                          ? "rotate(180deg)"
+                          : "rotate(0deg)",
+                        transition: "transform 0.3s",
                       }}
                     >
-                      Personal Information{" "}
-                    </Typography>
+                      <img
+                        src="/authPhotos/resumeProfile/Vector.svg"
+                        alt="vector"
+                      />
+                    </Box>
                   </Box>
-                  <Box>
-                    <img
-                      src="/authPhotos/resumeProfile/Vector.svg"
-                      alt="vector"
-                    />
-                  </Box>
+                  <Divider sx={{ flex: 1, mt: 2 }} />
+                  {/* Render section-specific content */}
+                  {expandedSections[index] && (
+                    <Box sx={{ mt: 2 }}>{section.content}</Box>
+                  )}
                 </Box>
-                <Divider sx={{ flex: 1, mt: 2 }} />
-              </Box>
-
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  padding: "20px",
-                  border: "1px solid rgba(237, 237, 237, 1)",
-                  bgcolor: "rgba(255, 255, 255, 1)",
-                  borderRadius: "10px",
-                  justifyContent: "space-between",
-                  cursor: "pointer",
-                  mb: 2,
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Box sx={{ display: "flex", flexDirection: "row", gap: 1 }}>
-                    <img
-                      src="/authPhotos/resumeProfile/user-alt.svg"
-                      alt="user-alt"
-                    />
-                    <Typography
-                      variant="body1"
-                      sx={{
-                        fontSize: "12px",
-                        color: "rgba(0, 0, 0, 1)",
-                        fontWeight: "700",
-                      }}
-                    >
-                      Professional Summary{" "}
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <img
-                      src="/authPhotos/resumeProfile/Vector.svg"
-                      alt="vector"
-                    />
-                  </Box>
-                </Box>
-                <Divider sx={{ flex: 1, mt: 2 }} />
-              </Box>
-
-              <Box
-                sx={{
-                  cursor: "pointer",
-                  display: "flex",
-                  flexDirection: "column",
-                  padding: "20px",
-                  border: "1px solid rgba(237, 237, 237, 1)",
-                  bgcolor: "rgba(255, 255, 255, 1)",
-                  borderRadius: "10px",
-                  justifyContent: "space-between",
-                  mb: 2,
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Box sx={{ display: "flex", flexDirection: "row", gap: 1 }}>
-                    <img
-                      src="/authPhotos/resumeProfile/briefcase-plus.svg"
-                      alt="briefcase-plus"
-                    />
-                    <Typography
-                      variant="body1"
-                      sx={{
-                        fontSize: "12px",
-                        color: "rgba(0, 0, 0, 1)",
-                        fontWeight: "700",
-                      }}
-                    >
-                      Job Preferences{" "}
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <img
-                      src="/authPhotos/resumeProfile/Vector.svg"
-                      alt="vector"
-                    />
-                  </Box>
-                </Box>
-                <Divider sx={{ flex: 1, mt: 2 }} />
-              </Box>
-              <Box
-                sx={{
-                  cursor: "pointer",
-                  display: "flex",
-                  flexDirection: "column",
-                  padding: "20px",
-                  border: "1px solid rgba(237, 237, 237, 1)",
-                  bgcolor: "rgba(255, 255, 255, 1)",
-                  borderRadius: "10px",
-                  justifyContent: "space-between",
-                  mb: 2,
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Box sx={{ display: "flex", flexDirection: "row", gap: 1 }}>
-                    <img
-                      src="/authPhotos/resumeProfile/medal-star.svg"
-                      alt="medal-star"
-                    />
-                    <Typography
-                      variant="body1"
-                      sx={{
-                        fontSize: "12px",
-                        color: "rgba(0, 0, 0, 1)",
-                        fontWeight: "700",
-                      }}
-                    >
-                      Professional Skills{" "}
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <img
-                      src="/authPhotos/resumeProfile/Vector.svg"
-                      alt="vector"
-                    />
-                  </Box>
-                </Box>
-                <Divider sx={{ flex: 1, mt: 2 }} />
-              </Box>
-              <Box
-                sx={{
-                  cursor: "pointer",
-                  display: "flex",
-                  flexDirection: "column",
-                  padding: "20px",
-                  border: "1px solid rgba(237, 237, 237, 1)",
-                  bgcolor: "rgba(255, 255, 255, 1)",
-                  borderRadius: "10px",
-                  justifyContent: "space-between",
-                  mb: 2,
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Box sx={{ display: "flex", flexDirection: "row", gap: 1 }}>
-                    <img
-                      src="/authPhotos/resumeProfile/briefcase-plus.svg"
-                      alt="briefcase-plus"
-                    />
-                    <Typography
-                      variant="body1"
-                      sx={{
-                        fontSize: "12px",
-                        color: "rgba(0, 0, 0, 1)",
-                        fontWeight: "700",
-                      }}
-                    >
-                      Additional Details{" "}
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <img
-                      src="/authPhotos/resumeProfile/Vector.svg"
-                      alt="vector"
-                    />
-                  </Box>
-                </Box>
-                <Divider sx={{ flex: 1, mt: 2 }} />
-              </Box>
-              <Box
-                sx={{
-                  cursor: "pointer",
-                  display: "flex",
-                  flexDirection: "column",
-                  padding: "20px",
-                  border: "1px solid rgba(237, 237, 237, 1)",
-                  bgcolor: "rgba(255, 255, 255, 1)",
-                  borderRadius: "10px",
-                  justifyContent: "space-between",
-                  mb: 2,
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Box sx={{ display: "flex", flexDirection: "row", gap: 1 }}>
-                    <img
-                      src="/authPhotos/resumeProfile/SuitcaseSimple.svg"
-                      alt="SuitcaseSimple"
-                    />
-                    <Typography
-                      variant="body1"
-                      sx={{
-                        fontSize: "12px",
-                        color: "rgba(0, 0, 0, 1)",
-                        fontWeight: "700",
-                      }}
-                    >
-                      {" "}
-                      Work Experience{" "}
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <img
-                      src="/authPhotos/resumeProfile/Vector.svg"
-                      alt="vector"
-                    />
-                  </Box>
-                </Box>
-                <Divider sx={{ flex: 1, mt: 2 }} />
-              </Box>
-              <Box
-                sx={{
-                  cursor: "pointer",
-                  display: "flex",
-                  flexDirection: "column",
-                  padding: "20px",
-                  border: "1px solid rgba(237, 237, 237, 1)",
-                  bgcolor: "rgba(255, 255, 255, 1)",
-                  borderRadius: "10px",
-                  justifyContent: "space-between",
-                  mb: 2,
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Box sx={{ display: "flex", flexDirection: "row", gap: 1 }}>
-                    <img
-                      src="/authPhotos/resumeProfile/GlobeSimple.svg"
-                      alt="GlobeSimple"
-                    />
-                    <Typography
-                      variant="body1"
-                      sx={{
-                        fontSize: "12px",
-                        color: "rgba(0, 0, 0, 1)",
-                        fontWeight: "700",
-                      }}
-                    >
-                      {" "}
-                      Social Links
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <img
-                      src="/authPhotos/resumeProfile/Vector.svg"
-                      alt="vector"
-                    />
-                  </Box>
-                </Box>
-                <Divider sx={{ flex: 1, mt: 2 }} />
-              </Box>
-              <Box
-                sx={{
-                  cursor: "pointer",
-                  display: "flex",
-                  flexDirection: "column",
-                  padding: "20px",
-                  border: "1px solid rgba(237, 237, 237, 1)",
-                  bgcolor: "rgba(255, 255, 255, 1)",
-                  borderRadius: "10px",
-                  justifyContent: "space-between",
-                  mb: 2,
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Box sx={{ display: "flex", flexDirection: "row", gap: 1 }}>
-                    <img
-                      src="/authPhotos/resumeProfile/graduation-cap.svg"
-                      alt="graduation-cap"
-                    />
-                    <Typography
-                      variant="body1"
-                      sx={{
-                        fontSize: "12px",
-                        color: "rgba(0, 0, 0, 1)",
-                        fontWeight: "700",
-                      }}
-                    >
-                      {" "}
-                      Education
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <img
-                      src="/authPhotos/resumeProfile/Vector.svg"
-                      alt="vector"
-                    />
-                  </Box>
-                </Box>
-                <Divider sx={{ flex: 1, mt: 2 }} />
-              </Box>
+              ))}
               <Box
                 sx={{
                   display: "flex",
@@ -957,9 +741,23 @@ export default function ResumeProfile() {
                 )}
               </Box>
 
-              <Button  sx={{ color:'white',backgroundImage:
-                      "linear-gradient(to right, rgba(5, 110, 202, 1), rgba(8, 58, 103, 1))",padding:"8px,16px,8px,16px",borderRadius:"37px",fontSize:"16px",fontWeight:"500",textTransform:"none",width:"100%",height:"40px",mt:1,mb:1}}>
-                  Save 
+              <Button
+                sx={{
+                  color: "white",
+                  backgroundImage:
+                    "linear-gradient(to right, rgba(5, 110, 202, 1), rgba(8, 58, 103, 1))",
+                  padding: "8px,16px,8px,16px",
+                  borderRadius: "37px",
+                  fontSize: "16px",
+                  fontWeight: "500",
+                  textTransform: "none",
+                  width: "100%",
+                  height: "40px",
+                  mt: 1,
+                  mb: 1,
+                }}
+              >
+                Save
               </Button>
             </Box>
           </Box>
