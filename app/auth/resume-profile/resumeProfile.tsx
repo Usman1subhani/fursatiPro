@@ -204,11 +204,11 @@ export default function ResumeProfile() {
           alignItems: "center",
         }}
       >
+        <Box sx={{ width: "100%",  mx: "auto", textAlign: "center" }}>
+
         <Box
           sx={{
-            width: "100%",
-            maxWidth: 1200,
-            mx: "auto",
+           
             textAlign: "center",
 
             py: { xs: 4, md: 7 },
@@ -248,6 +248,7 @@ export default function ResumeProfile() {
             We’ve filled in your details from your CV. Please check and update
             anything missing.
           </Typography>
+        </Box>
         </Box>
         <Box
           sx={{
