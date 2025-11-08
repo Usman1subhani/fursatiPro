@@ -87,9 +87,6 @@ export default function CreateAccountInstantly() {
       });
     }, 200);
   };
-  const triggerError = () => {
-    setError("Upload failed! Please try again.");
-  };
   const handleTryAgain = () => {
     reset();
     setTimeout(() => {
@@ -540,8 +537,6 @@ export default function CreateAccountInstantly() {
                 `}</style>
               </Box>
             )}
-
-            <Button onClick={triggerError}>Simulate Upload Error</Button>
             {!file && (
               <>
                 <Box
